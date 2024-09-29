@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>  
+<manifest>  
+  <control namespace="jdcm" constructor="JppdugComponent" version="0.0.11" display-name-key="JppdugComponent" description-key="" control-type="virtual" >  
+    <!--external-service-usageノードは、このサードパーティのPCFコントロールが外部サービスを使用しているかどうかを宣言します。もし使用している場合、このコントロールはプレミアムと見なされ、使用している外部ドメインも追加してください。  
+    外部サービスを使用していない場合、enabledを"false"に設定し、以下にドメインを追加しないでください。enabledはデフォルトでfalseです。  
+    例1:  
+      <external-service-usage enabled="true">  
+        <domain>www.Microsoft.com</domain>  
+      </external-service-usage>  
+    例2:  
+      <external-service-usage enabled="false">  
+      </external-service-usage>  
+    -->  
+    <external-service-usage enabled="false">  
+      <!--外部ドメインを追加するにはコメントを解除してください  
+      <domain></domain>  
+      <domain></domain>  
+      -->  
+    </external-service-usage>  
+    <!-- propertyノードは、コントロールがCDSから期待する特定の設定可能なデータを識別します -->  
+    <property name="sampleProperty" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" />  
+    <!-- Button Properties -->  
+    <property 
+      name="PCFButton_text" 
+      display-name-key="ボタンに表示する文字列" 
+      description-key="ボタンに表示する文字列"
+      of-type="SingleLine.Text" 
+      usage="bound" 
+      required="false" 
+      default-value='"Standard"' 
+    />  
+    <property 
+    	name="PCFButton_secondaryText" 
+    	display-name-key="ボタンに表示する2行目文字列" 
+      description-key="ボタンに表示する2行目文字列"
+    	of-type="SingleLine.Text" 
+    	usage="bound" 
+    	required="false" 
+    	pfx-default-value='"This is the secondary text."' 
+    />  
+    <property name="PCFButton_Disabled" display-name-key="ボタンの使用設定" of-type="TwoOptions" usage="bound" required="false"  pfx-default-value="false"/>  
+    <property name="PCFButton_primary" display-name-key="プライマリボタンとして設定するか" of-type="TwoOptions" usage="bound" required="false"  pfx-default-value="false"/>  
+    <property name="PCFButton_checked" display-name-key="ボタンんのチェック状態" of-type="TwoOptions" usage="bound" required="false"  pfx-default-value="false"/>  
+
+    <!--  
+      Propertyノードのof-type属性はof-type-group属性であることがあります。  
+      例:  
+      <type-group name="numbers">  
+        <type>Whole.None</type>  
+        <type>Currency</type>  
+        <type>FP</type>  
+        <type>Decimal</type>  
+      </type-group>  
+      <property name="sampleProperty" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type-group="numbers" usage="bound" required="true" />  
+    -->  
+
+    <!-- dataset ノードはCDS上のエンティティレコードのセットを表します; 複数のデータセットを許可します -->  
+    <data-set 
+      name="DatasetList" 
+      display-name-key="データセット設定" 
+      description-key="コントロール内で表示する為のデータセットを設定します"
+      pfx-default-value='[{ ID: 1, date: 2023-1-1, city: "札幌", maxtemperature: 7.6,  mintemperature: -13.2,  avgtemperature: -4.4 },  { ID: 2, date: 2023-2-1, city: "札幌", maxtemperature: 11.2, mintemperature: -10.5, avgtemperature: -2.7 }] '
+    >  
+      <!-- 'property-set' ノードは、データセット内の各レコードが提供しなければならない一意の設定可能なプロパティを表します。 -->  
+      <!-- プロパティセットノードを追加するにはコメントを解除 -->  
+      <property-set name="samplePropertySet" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" />  
+    </data-set>  
+
+    <!--クリックイベントの実装-->
+    <event
+      name='onPCFButtonClick'
+      display-name-key='PCFボタンクリック'
+      description-key='PCFボタンがクリックされたときのイベント動作'
+      pfx-default-value='UpdateContext({varPCFButtonClick:"PCFボタンがクリックされました"})'
+    />
+
+
+    <resources>  
+      <code path="index.ts" order="1"/>  
+      <platform-library name="React" version="16.8.6" />  
+      <platform-library name="Fluent" version="8.29.0" />  
+      <css path="../node_modules\katex\dist\katex.css" order="1" />
+      <css path="../node_modules\katex\dist\katex.min.css" order="2" />      
+      <!-- 追加のリソースを追加するにはコメントを解除してください  
+      <css path="css/JppdugComponent.css" order="1" />  
+      <resx path="strings/JppdugComponent.1033.resx" version="1.0.0" />  
+      -->  
+    </resources>  
+    <!-- 指定されたAPIを有効にするにはコメントを解除してください  
+    <feature-usage>  
+      <uses-feature name="Device.captureAudio" required="true" />  
+      <uses-feature name="Device.captureImage" required="true" />  
+      <uses-feature name="Device.captureVideo" required="true" />  
+      <uses-feature name="Device.getBarcodeValue" required="true" />  
+      <uses-feature name="Device.getCurrentPosition" required="true" />  
+      <uses-feature name="Device.pickFile" required="true" />  
+      <uses-feature name="Utility" required="true" />  
+      <uses-feature name="WebAPI" required="true" />  
+    </feature-usage>  
+    -->  
+  </control>  
+</manifest>  

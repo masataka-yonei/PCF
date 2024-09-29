@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>  
+<manifest>  
+  <control namespace="ARdotNet" constructor="ARdotNetParamViewer" version="1.0.1" display-name-key="ARdotNetParamViewer"  control-type="virtual" >
+    <!--external-service-usageノードは、このサードパーティPCFコントロールが外部サービスを使用しているかどうかを宣言します。もし使用している場合、このコントロールはプレミアムと見なされ、使用している外部ドメインも追加してください。  
+    外部サービスを使用していない場合、enabled="false"に設定し、以下にドメインを追加しないでください。"enabled"はデフォルトでfalseになります。  
+    例1:  
+      <external-service-usage enabled="true">  
+        <domain>www.Microsoft.com</domain>  
+      </external-service-usage>  
+    例2:  
+      <external-service-usage enabled="false">  
+      </external-service-usage>  
+    -->  
+    <external-service-usage enabled="true">  
+    <domain>http://example.com/</domain>  
+      <!--外部ドメインを追加するにはコメントを解除してください  
+      <domain>http://example.com/</domain>  
+      <domain></domain>  
+      -->  
+    </external-service-usage>  
+    <!-- propertyノードは、コントロールがCDSから期待する特定の設定可能なデータを識別します -->  
+    <property name="Server_Url" display-name-key="Server_Url" description-key="ActiveReport.Netのバックエンドサーバーを指定します。" of-type="SingleLine.Text" pfx-default-value ='"http://example.com/"' usage="input" required="true"  />  
+    <property name="Reports_ID" display-name-key="Reports_ID" description-key="表示するレポートを指定します。" of-type="SingleLine.Text" pfx-default-value ='"Invoice.rdlx"' usage="input" required="true"/>  
+    <property name="Reports_Loading" display-name-key="Reports_Loading" description-key="レポートの読み込みを行うかを指定します。" of-type="TwoOptions" pfx-default-value ='false' usage="input" required="true"/>  
+    <property name="Reports_Parameter" display-name-key="Reports_Parameter" description-key="レポートへパラメータを渡します。" of-type="Multiple"  usage="input" required="false"/>  
+    <property name="Style_Width" display-name-key="Style_Width" description-key="ビューワの横幅を指定します。" of-type="SingleLine.Text" pfx-default-value ='"100%"' usage="input" required="true"/>  
+    <property name="Style_Height" display-name-key="Style_Height" description-key="ビューワの高さを指定します。" of-type="SingleLine.Text" pfx-default-value ='"100vh"' usage="input" required="true"/>
+
+    <resources>  
+      <code path="index.ts" order="1"/>  
+      <platform-library name="React" version="16.8.6" />  
+      <!-- <platform-library name="Fluent" version="8.29.0" />       -->
+      <css path="css/App.css" order="1" />  
+      <css path="css/jsViewer.min.css" order="2" />  
+      <css path="css/jsViewer.chart.min.css" order="3" />  
+      <!-- 追加のリソースを追加するにはコメントを解除してください  
+      <css path="css/ARdotNetViewer.css" order="1" />  
+      <resx path="strings/ARdotNetViewer.1033.resx" version="1.0.0" />  
+      -->  
+    </resources>  
+    <!-- 指定されたAPIを有効にするにはコメントを解除してください  
+    <feature-usage>  
+      <uses-feature name="Device.captureAudio" required="true" />  
+      <uses-feature name="Device.captureImage" required="true" />  
+      <uses-feature name="Device.captureVideo" required="true" />  
+      <uses-feature name="Device.getBarcodeValue" required="true" />  
+      <uses-feature name="Device.getCurrentPosition" required="true" />  
+      <uses-feature name="Device.pickFile" required="true" />  
+      <uses-feature name="Utility" required="true" />  
+      <uses-feature name="WebAPI" required="true" />  
+    </feature-usage>  
+    -->  
+  </control>  
+</manifest>  
